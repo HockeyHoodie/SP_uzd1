@@ -1,9 +1,11 @@
+//Elementu definēšana
 const questionElement = document.getElementById("question");
 const answerButton = document.getElementById("answer-btns");
 const nextButton = document.getElementById("next-btn");
 const startButton = document.getElementById("start-btn");
 const resetButton = document.getElementById("reset-btn");
 
+//Mainīgie
 let currentQuestionIndex = 0;
 let score = 0;
 let passingScore = 8;
@@ -11,7 +13,7 @@ let timerInterval;
 let selectedButton = null;
 
 function startQuiz() {
-    currentQuestionIndex = 0;
+    currentQuestionIndex = 0; //Atiestatīšana
     score = 0;
     selectedButton = null;
     nextButton.innerHTML = "Nākamais";
@@ -23,10 +25,10 @@ function startQuiz() {
 }
 
 function startTimer() {
-    let timeLeft = 600; 
+    let timeLeft = 600; //10min
     const timerElement = document.getElementById("timer");
     
-    if (timerInterval) {
+    if (timerInterval) {    //neļauj vairākiem taimeriem ieslēgties vienlaicīgi
         clearInterval(timerInterval);
     }
 
@@ -66,21 +68,21 @@ function showQuestion() {
     
     const questionText = document.createElement("p");
     questionText.innerHTML = questionNr + ". " + currentQuestion.question;
-    questionContainer.appendChild(questionText);
+    questionContainer.appendChild(questionText);    //ievieto jautājuma tekstu div elementā
     
     if (currentQuestion.image) {
         const img = document.createElement("img");
         img.src = currentQuestion.image;
         img.classList.add("question-image");
-        questionContainer.appendChild(img);
+        questionContainer.appendChild(img);    //ievieto attēlu div elementā
     }
     
     questionElement.innerHTML = "";
     questionElement.appendChild(questionContainer);
 
-    if (currentQuestion.answers && Array.isArray(currentQuestion.answers)) {
-        currentQuestion.answers.forEach(answer => {
-            if (answer && answer.text) {
+    if (currentQuestion.answers && Array.isArray(currentQuestion.answers)) {    //pārbauda vai atbildes ir masīvā (vai nav kļūdas)
+        currentQuestion.answers.forEach(answer => { //answer ir objekts
+            if (answer && answer.text) {    //kļūdu pārbaude - vai ir teksts un objekts pastāv
                 const button = document.createElement("button");
                 button.innerHTML = answer.text;
                 button.classList.add("btn");
@@ -101,7 +103,7 @@ function resetState() {
     nextButton.disabled = false;
     selectedButton = null;
     while (answerButton.firstChild) {
-        answerButton.removeChild(answerButton.firstChild);
+        answerButton.removeChild(answerButton.firstChild);  //izņem pogas no konteinera
     }
 }
 
