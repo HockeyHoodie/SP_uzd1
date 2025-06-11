@@ -130,7 +130,7 @@ function handleNextButton() {
     }
 
     Array.from(answerButton.children).forEach(button => {
-        button.disabled = true;
+        button.disabled = true; //neļauj atbildēt vēlreiz
     });
 
     currentQuestionIndex++;
